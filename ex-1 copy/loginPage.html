@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <title>login</title>
+     <link rel="stylesheet"  href="loginStyle.css" media="screen" />
+
+    </head>
+    <body>
+            <h2>Login </h2>
+
+            <form>
+              <div class="container">
+                <label for="uname"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email..." name="name" id = "email" onblur="validate()" required>
+                <h6 id= "result">  </h6>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id= "password" onblur="checkPassword()" required>
+                <h6 id= "resultPassword">  </h6>   
+                <button onclick="redirct()" type="button" >Login</button>
+              </div>
+            </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <script>
+          function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+            }
+
+          function validate() {
+            var $result = $("#result");
+            var email = $("#email").val();
+            $result.text("");
+
+           if (validateEmail(email)) {
+            $("#submit").removeAttr("disabled")   
+            $result.text(null);
+            $result.css("color", "green");
+           } else {
+            $("#submit").attr("disabled",true) 
+            $result.text(email + " this is not an email Form example: name@test.com ");
+            $result.css("color", "red");
+           }
+           return false;
+           }
+         function checkPassword(){
+           var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+           if($("#password").val().match(passw)) 
+           { 
+            $("#resultPassword").text(null);
+            $("#resultPassword").css("color", "green");
+            return true;
+           }
+           else{ 
+            $("#resultPassword").text("your password should be between 6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter");
+            $("#resultPassword").css("color", "red");
+            return false;
+           }
+         }
+         function redirct(){
+            var value = checkPassword();
+            console.log("before")
+            if(value){
+              console.log(value)
+
+            window.location.replace("contentPage.html");
+            }
+            return false;
+    
+         }
+      </script>
+    </body>
+</html>
+
+
+
